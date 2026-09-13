@@ -1,0 +1,35 @@
+name: Mise à jour planning IA
+
+on:
+  schedule:
+    # 04:07 UTC = 06:07 heure de Paris (été), chaque jour du 13 au 18 septembre.
+    # Le script s'arrête de lui-même après le 18/09/2026 (--until).
+    - cron: "7 4 13-18 9 *"
+  workflow_dispatch:   # bouton "Run workflow" pour lancer à la main
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Télécharger et filtrer le planning ADE
+        env:
+          ADE_ICS_URL: ${{ secrets.ADE_ICS_URL }}
+          EDT_FILTER: Intelligence artificielle
+        run: python3 update_planning.py --until 2026-09-18
+
+      - name: Publier si changement
+        run: |
+          git config user.name "edt-bot"
+          git config user.email "actions@users.noreply.github.com"
+          if git diff --quiet -- ADECal-IA-seul.ics; then
+            echo "Aucun changement de planning."
+          else
+            git add ADECal-IA-seul.ics CHANGELOG.md
+            git commit -m "Planning IA mis à jour ($(TZ=Europe/Paris date '+%d/%m/%Y %H:%M'))"
+            git push
+          fi
