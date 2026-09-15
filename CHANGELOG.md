@@ -13,3 +13,7 @@ Généré automatiquement par `update_planning.py` (comparaison avec la version 
 - ~ SALLE     jeu 17/09 14h00 TD : Salle A139 (H118) EIPT/VP  ->  Salle A130 (H103)  EIPT/VP
 - ~ SALLE     ven 18/09 09h00 TD : Salle A139 (H118) EIPT/VP  ->  Salle A130 (H103)  EIPT/VP
 - ~ SALLE     ven 18/09 14h00 TD : Salle A139 (H118) EIPT/VP  ->  Salle A130 (H103)  EIPT/VP
+
+## 15/09/2026 11:20
+
+- ~ SALLE     mar 15/09 09h00 CM : Salle A139 (H118) EIPT/VP  ->  Salle A125 (H122) VP
